@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn" style="width: 200px;height:200px">点击输出防抖</button>
+    <script>
+        let btn = document.querySelector('#btn');
+        btn.onclick = debounce(function () {
+            console.log('防抖了');
+        }, 600)
+        // 防抖函数
+        function debounce(fn, delay = 500) {
+            let timer = null;
+            return function () {
+                // 如果重复点击则一直清空定时器
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                // 最后一次在执行定时器
+                timer = setTimeout(() => {
+                    // apply作用就是调用传入的fn函数
+                    fn.apply(this, arguments);
+                    // 初始化
+                    timer = null;
+                }, delay);
+            }
+        }
+    </script>
+</body>
+
+</html>

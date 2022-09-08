@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr1 = [1, 2, 345, 1, 2, 455, 66, 56, 66];
+        // set + Array.from()
+        // 转化为set数据结构，利用set的特性去重
+        function removeRepeat1(arr1) {
+            return Array.from(new Set(arr1));
+        }
+        console.log(removeRepeat1(arr1), 1);
+
+        // 拓展运算符+set
+        function removeRepeat2(arr1) {
+            return [...new Set(arr1)];
+        }
+        console.log(removeRepeat2(arr1), 2);
+
+        // indexOf() 检测是否有相同元素
+        function removeRepeat3(arr1) {
+            let new_arr = [];
+            arr1.forEach((item) => {
+                if (new_arr.indexOf(item) === -1) {
+                    new_arr.push(item);
+                }
+            });
+            return new_arr;
+        }
+        console.log(removeRepeat3(arr1), 3);
+
+        // includes 检测是否有相同元素
+        function removeRepeat4(arr1) {
+            let new_arr = [];
+            arr1.forEach((item) => {
+                if (!new_arr.includes(item)) {
+                    new_arr.push(item);
+                }
+            });
+            return new_arr;
+        }
+        console.log(removeRepeat4(arr1), 4);
+
+        // filter配合indexOf过滤出不相同的元素
+        function removeRepeat5(arr1) {
+            return arr1.filter((item, index) => {
+                // 过滤条件：indexOf()返回的是数组中元素第一次出现的索引值
+                return arr1.indexOf(item) === index;
+            });
+        }
+        console.log(removeRepeat5(arr1), 5);
+
+        //Map结构
+        function removeRepeat6(arr1) {
+            let map = new Map();
+            let new_arr = [];
+            arr1.forEach((item) => {
+                // 判断map中是否有相同的键值
+                if (!map.has(item)) {
+                    // 没有则需要加到map中，下一个相同值出现时，不会push
+                    map.set(item, true);
+                    new_arr.push(item);
+                }
+            })
+            return new_arr;
+        }
+        console.log(removeRepeat6(arr1), 6);
+        console.log(arr1, '原');
+    </script>
+</body>
+
+</html>

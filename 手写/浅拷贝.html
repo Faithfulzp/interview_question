@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    function shallowClone(obj) {
+        let result = {};
+        for (let i in obj) {
+            result[i] = obj[i];
+        }
+        return result;
+    }
+    let obj1 = {
+        a: 1,
+        b: 'fzp',
+        c: {
+            c1: '11',
+            c2: '22',
+        },
+        e: [1, 2, 3]
+    }
+    // 其实直接赋值即可完成浅拷贝
+    let obj2 = obj1;
+    obj1.a = 2;
+    obj1.b = 'zq'
+    obj1.c.c1 = '33'
+    obj1.e[2] = 4;
+    console.log(obj1);
+    console.log(obj2);
+</script>

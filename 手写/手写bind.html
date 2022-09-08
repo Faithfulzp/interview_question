@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            name: 'fzp',
+            age: 22
+        }
+        function test() {
+            console.log(...arguments);
+            this.address = '杭州';
+        }
+        test.prototype.No = 'NO';
+        Function.prototype.mybind = function (context, ...args) {
+            // this是原函数对象
+            // context是bind绑定的执行上下文。
+            // 1、判断调用者是否为一个函数对象
+            if (typeof this !== "function") {
+                return new TypeError('error');
+            }
+            // 如果没传新的this指向则默认为window
+            var context = context || window;
+            let self = this;
+            // 返回值函数
+            function fn(...fnArgs) {
+                // 原函数apply调用，判断是否是实例对象的调用，如果是则this指向本身，如果不是则指向传入的context上下文
+                // 第二个参数是传入函数的所有参数的集合，因为bind传回的函数可以多次调用，多次传值
+                return self.apply(this instanceof fn ? this : context, args.concat(fnArgs))
+            }
+            // 利用原型继承，返回的函数需要继承原函数的原型对象属性和方法
+            fn.prototype = Object.create(self.prototype);
+            return fn;
+        }
+        // 第一次调用指定新的this
+        let myfn = test.mybind(obj, 18);
+        // 第二次调用,new创建实例，this指向的是本身
+        let newObj = new myfn(16);
+        console.log(newObj.No);
+        console.log(newObj.address);
+    </script>
+</body>
+
+</html>

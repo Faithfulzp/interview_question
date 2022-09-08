@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let father = {
+        name: 'father',
+        age: [12, 23, 44, 45]
+    }
+    // 将son1变为father的实例对象
+    let son1 = Object.create(father);
+    let son2 = Object.create(father);
+    console.log(son1);
+    // 基本数据类型的修改不共享地址
+    son1.name = 'son1'
+    console.log(son2.name);
+    // 引用数据类型的修改共享地址
+    son1.age.push(26);
+    son2.age.push(33)
+    console.log(son1.age);
+</script>

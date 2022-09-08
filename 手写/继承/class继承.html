@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    class father {
+        constructor(name) {
+            this.name = name;
+            this.address = '杭州'
+        }
+        getAddress = function () {
+            return this.address;
+        }
+    }
+    class son extends father {
+        constructor(name, age) {
+            super(name);
+            this.age = age;
+        }
+    }
+    let son1 = new son('father', 43);
+    console.log(son1);
+    console.log(son1.getAddress());
+
+</script>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    function clone(father, son) {
+        // 这里用 Object.create 就可以减少组合继承中多进行一次构造的过程
+        // 原型链继承，将son的原型对象变为father的实例化对象
+        son.prototype = Object.create(father.prototype);
+        // 手动挂载constructor
+        son.prototype.constructor = son;
+    }
+    function father(name) {
+        this.name = name;
+        this.age = [12, 3, 4, 55];
+    }
+    father.prototype.getFatherName = function () {
+        return this.name;
+    }
+    function son1() {
+        father.call(this, 'father')
+        this.address = '杭州';
+    }
+
+    clone(father, son1);
+    son1.prototype.getSonAddress = function () {
+        return this.address;
+    }
+    let son2 = new son1();
+    console.log(son2);
+    console.log(son2.getFatherName());
+    console.log(son2.getSonAddress());
+    console.log(son2.age);
+
+</script>

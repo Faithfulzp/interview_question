@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let father = {
+        name: 'father',
+        age: [12, 23, 44, 45]
+    }
+    function child(father) {
+        // 1、将son1变为father的实例对象
+        let son1 = Object.create(father);
+        // 2、然后可以在函数里给这个实例对象添加方法；
+        son1.getFatherAge = function () {
+            return this.age;
+        }
+        // 3、最终函数返回这个实例对象，
+        return son1;
+    }
+    // 4、将函数返回值赋值给一个变量。
+    let son2 = child(father)
+    console.log(son2);
+    console.log(son2.getFatherAge());
+</script>

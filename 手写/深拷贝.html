@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // 递归实现深拷贝
+    function deepClone(obj) {
+        // 判断是否是引用数据类型：数组、对象、null，如果是则继续调用回调函数，如果不是就是基本数据类型直接进行赋值
+        if (typeof obj === 'object') {
+            // 接着判断obj是数组还是对象,给result一个初始值类型
+            let result = obj.constructor == Array ? [] : {};
+            // let result = obj instanceof Array ? [] : {};
+            // 遍历obj赋值
+            for (let i in obj) {
+                result[i] = typeof obj[i] === 'object' ? deepClone(obj[i]) : obj[i];
+            }
+            // 返回值可能是数组也可能是对象
+            return result;
+        } else {
+            // 如果是基本数据类型直接返回赋值
+            return obj;
+        }
+    }
+    let obj1 = {
+        a: 1,
+        b: 'fzp',
+        c: {
+            c1: '11',
+            c2: '22',
+        },
+        e: [1, 2, 3],
+        f: undefined,
+    }
+    let obj2 = deepClone(obj1);
+    obj1.b = 'zq';
+    obj1.c.c1 = '33';
+    obj1.e[0] = 4;
+    // console.log(obj1);
+    // console.log(obj2);
+
+    // JSON实现深拷贝
+    let obj3 = {
+        a: 1,
+        b: 'fzp',
+        c: {
+            c1: '11',
+            c2: '22',
+        },
+        e: [1, 2, 3]
+    }
+    // json方法相对来说更方便：先转化成字符串，再转化回来赋值给新的变量。
+    // 缺点：1、不能识别undefined，2、不能解决循环引用的对象，3、不能序列化函数
+    let obj4 = JSON.parse(JSON.stringify(obj3));
+    obj3.b = 'zq';
+    obj3.c.c1 = '33';
+    obj3.e[0] = 4;
+    console.log(obj3);
+    console.log(obj4);
+</script>

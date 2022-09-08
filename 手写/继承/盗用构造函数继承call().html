@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    function father(name) {
+        this.name = name;
+        this.age = 23;
+    }
+    father.prototype.getParentValue = function () {
+        return console.log(this.age);
+    }
+    function son1() {
+        // 修改father的this指向，并可传参
+        father.call(this, 'child1')
+        this.address = '杭州1';
+    }
+    function son2() {
+        // 修改father的this指向，并可传参
+        father.call(this, 'child2')
+        this.address = '杭州2';
+    }
+    // 实例化子类
+    let child1 = new son1();
+    let child2 = new son2();
+    let parent = new father();
+    console.log(child1);
+    console.log(child2);
+    console.log(child1.name);
+    console.log(child2.name);
+    parent.getParentValue();
+    // child1.getParentValue(); // 报错
+</script>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // 计算长方形面积
+    function getArea1(width, height) {
+        return width * height;
+    }
+    // 但是每次计算，我们让宽width固定不变
+    console.log(getArea1(10, 20));
+    console.log(getArea1(10, 30));
+    console.log(getArea1(10, 40));
+    // 同样是计算面积，为了避免不变的width重复被传入，我们柯里化函数
+    function getArea2(width) {
+        return (height) => {
+            return width * height;
+        }
+    }
+    // 将函数的返回值函数赋值给新函数，新函数只需要传入一个参数即可完成面积计算
+    let getArea3 = getArea2(10);
+    console.log(getArea3(20));
+    console.log(getArea3(30));
+    console.log(getArea3(40));
+</script>

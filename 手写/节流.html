@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn" style="width: 200px;height:200px">点击输出节流</button>
+</body>
+
+</html>
+<script>
+    const btn = document.querySelector('#btn');
+    // 多次点击，节流函数只执行一次，即返回的函数绑定了点击事件之后，下次点击直接执行返回值函数
+    btn.onclick = throttled(function () {
+        console.log("节流了");
+    }, 600)
+    // 节流函数
+    function throttled(fn, delay = 500) {
+        // 初始化延时器
+        let timer = null;
+        return function () {
+            // 如果定时器不为空，即在节流时间之内直接return
+            if (timer) return;
+            timer = setTimeout(() => {
+                // apply作用就是调用传入的fn函数
+                fn.apply(this, arguments)
+                // 重新赋值
+                timer = null;
+            }, delay);
+        }
+    }
+</script>
