@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function father(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        father.prototype.address = function () {
+            console.log('杭州');
+        }
+        function myNew(ctx, ...agrs) {
+            // 创建一个空对象
+            let obj = {};
+            // 将obj的__proto__指向构造函数的原型对象prototype
+            obj.__proto__ = ctx.prototype;
+            // 将原构造函数的this指向新的这个obj对象,多个参数需要用apply来指向
+            let result = ctx.apply(obj, agrs);
+            // 判断是否有返回值，如果是null、undefined或没有返回值则返回obj，如果有则直接返回result
+            return result instanceof Object ? result : obj;
+        }
+        let p = myNew(father, 'fzp', 22);
+        console.log(p);
+        p.address();
+    </script>
+</body>
+
+</html>
